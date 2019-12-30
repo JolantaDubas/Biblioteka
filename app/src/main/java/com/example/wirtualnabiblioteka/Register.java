@@ -8,15 +8,17 @@ import android.view.View;
 import android.widget.EditText;
 
 public class Register extends AppCompatActivity {
-    EditText name, surname, age, username, password;
-    String str_name, str_surname, str_age, str_username, str_password;
+    EditText name, surname, email, phone, address, username, password;
+    String str_name, str_surname, str_email, str_phone, str_address, str_username, str_password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         name=(EditText)findViewById(R.id.et_name);
         surname=(EditText)findViewById(R.id.et_surname);
-        age=(EditText)findViewById(R.id.et_age);
+        email=(EditText)findViewById(R.id.et_email);
+        phone=(EditText)findViewById(R.id.et_phone);
+        address=(EditText)findViewById(R.id.et_address);
         username=(EditText)findViewById(R.id.et_username);
         password=(EditText)findViewById(R.id.et_password);
     }
@@ -24,15 +26,17 @@ public class Register extends AppCompatActivity {
     public void OnRegister(View view){
         str_name = name.getText().toString();
         str_surname = surname.getText().toString();
-        str_age = age.getText().toString();
+        str_email = email.getText().toString();
+        str_phone = phone.getText().toString();
+        str_address = address.getText().toString();
         str_username = username.getText().toString();
         str_password = password.getText().toString();
         String type = "register";
         BackgroundWorker backgroundWorker = new BackgroundWorker(this);
-        backgroundWorker.execute(type, str_name, str_surname,str_age, str_username, str_password);
+        backgroundWorker.execute(type, str_name, str_surname,str_email,str_phone,str_address, str_username, str_password);
     }
 
     public void OpenLogin(View view) {
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, Login.class));
     }
 }

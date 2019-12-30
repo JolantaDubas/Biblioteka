@@ -2,19 +2,20 @@ package com.example.wirtualnabiblioteka;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-public class MainActivity extends AppCompatActivity{
+public class Login extends AppCompatActivity{
     EditText UsernameEt, PasswordEt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        UsernameEt = (EditText)findViewById(R.id.et_name);
-        PasswordEt = (EditText)findViewById(R.id.et_username);
+        setContentView(R.layout.activity_login);
+        UsernameEt = (EditText)findViewById(R.id.etUserName);
+        PasswordEt = (EditText)findViewById(R.id.etPassword);
     }
 
     public void OnLogin(View view) {
