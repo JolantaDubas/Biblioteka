@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/Background"
+    tools:context="MainActivity">
+
+    <SearchView
+        style="@android:style/Widget.Material.Light.SearchView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="14dp"
+        android:background="@android:color/white" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal">
+
+        <!--    <EditText
+            android:id="@+id/editTextHeroId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/editTextName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:hint="Name" />
+
+        <EditText
+            android:id="@+id/editTextRealname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:hint="Realname" />
+
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:stepSize="1" />
+
+
+        <Button
+            android:id="@+id/buttonAddUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add" />-->
+
+        <Button
+            android:id="@+id/ksiegozbior_button"
+            android:layout_width="213dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:text="Biblioteka"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/konto_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark"
+            android:onClick="OpenLogin"
+            android:text="Twoje konto"
+            android:textColor="@android:color/darker_gray" />
+    </LinearLayout>
+
+
+    <ListView
+        android:id="@+id/listViewBooks"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp">
+
+    </ListView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone" />
+
+</RelativeLayout>

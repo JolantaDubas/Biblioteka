@@ -29,5 +29,7 @@ public class Login extends AppCompatActivity{
     public void OpenRegister(View view) {
         startActivity(new Intent(this, Register.class));
     }
+    public void OpenLibrary(View view) { startActivity(new Intent(this, MainActivity.class));
+    }
 
 }

@@ -3,6 +3,7 @@
     package="com.example.wirtualnabiblioteka">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -12,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Library"></activity>
+        <activity android:name=".Book"></activity>
+        <activity android:name=".Library" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".Register" />
         <activity android:name=".Login">
             <intent-filter>

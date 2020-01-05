@@ -27,14 +27,17 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
     @Override
     protected String doInBackground(String... params) {
         String type = params[0];
-        String login_url = "http://192.168.88.249/biblioteka/login.php";
-        String register_url = "http://192.168.88.249/biblioteka/register.php";
+        String main_url = "http://192.168.88.249/biblioteka";
+        String login_url = "/login.php";
+        String register_url = "/register.php";
+        String library_url="/library.php";
+
 
         if(type.equals("login")) {
             try {
                 String user_name = params[1];
                 String password = params[2];
-                URL url = new URL(login_url);
+                URL url = new URL(main_url+login_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoOutput(true);
@@ -67,13 +70,14 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
 
             try {
                 String name = params[1];
-                String surname = params[2];
-                String email = params[3];
-                String phone = params[4];
-                String address = params[5];
-                String username = params[6];
-                String password = params[7];
-                URL url = new URL(register_url);
+                String secondname =params[2];
+                String surname = params[3];
+                String email = params[4];
+                String phone = params[5];
+                String address = params[6];
+                String username = params[7];
+                String password = params[8];
+                URL url = new URL(main_url+register_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoOutput(true);
@@ -81,6 +85,7 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
                 String post_data = URLEncoder.encode("name","UTF-8")+"="+URLEncoder.encode(name,"UTF-8")+"&"
+                        +URLEncoder.encode("secondname","UTF-8")+"="+URLEncoder.encode(secondname,"UTF-8")+"&"
                         +URLEncoder.encode("surname","UTF-8")+"="+URLEncoder.encode(surname,"UTF-8")+"&"
                         +URLEncoder.encode("email","UTF-8")+"="+URLEncoder.encode(email,"UTF-8")+"&"
                         +URLEncoder.encode("phone","UTF-8")+"="+URLEncoder.encode(phone,"UTF-8")+"&"
@@ -107,6 +112,9 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+        else if (type.equals("library")){
+
         }
 
         return null;
