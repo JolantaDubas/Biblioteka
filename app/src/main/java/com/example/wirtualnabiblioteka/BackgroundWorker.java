@@ -1,6 +1,8 @@
 package com.example.wirtualnabiblioteka;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 
 import java.io.BufferedReader;
@@ -9,17 +11,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
+import java.io.OutputStreamWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+
+
 
 /**
  * Created by ProgrammingKnowledge on 1/5/2016.
  */
 public class BackgroundWorker extends AsyncTask<String,Void,String> {
     Context context;
+
     AlertDialog alertDialog;
     BackgroundWorker (Context ctx) {
         context = ctx;
@@ -27,16 +32,16 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
     @Override
     protected String doInBackground(String... params) {
         String type = params[0];
-        String main_url = "http://192.168.88.249/biblioteka";
+        String main_url = "http://192.168.1.24/biblioteka";
         String login_url = "/login.php";
         String register_url = "/register.php";
-        String library_url="/library.php";
 
 
         if(type.equals("login")) {
             try {
                 String user_name = params[1];
                 String password = params[2];
+
                 URL url = new URL(main_url+login_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
@@ -52,14 +57,28 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
                 outputStream.close();
                 InputStream inputStream = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
+
                 String result="";
                 String line="";
+
+
+
                 while((line = bufferedReader.readLine())!= null) {
                     result += line;
+
+                    System.out.print(1);
                 }
                 bufferedReader.close();
                 inputStream.close();
                 httpURLConnection.disconnect();
+                System.out.print(2);
+
+                if(result!=null && result.equals("login success")){
+
+                    Intent intent =new Intent(context, MyBooks.class);
+                    intent.putExtra("login",user_name);
+                    context.startActivity(intent);
+                }
                 return result;
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -102,19 +121,18 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
                 String line="";
                 while((line = bufferedReader.readLine())!= null) {
                     result += line;
+
                 }
                 bufferedReader.close();
                 inputStream.close();
                 httpURLConnection.disconnect();
                 return result;
+
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-        else if (type.equals("library")){
-
         }
 
         return null;
@@ -128,6 +146,11 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPostExecute(String result) {
+       // if(result!=null && result.equals("login success")){
+
+           // Intent intent =new Intent(context, MyBooks.class);
+          //  context.startActivity(intent);
+       // }
         alertDialog.setMessage(result);
         alertDialog.show();
     }

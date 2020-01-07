@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,7 @@ import static android.view.View.GONE;
 
 public class MainActivity extends AppCompatActivity {
 
+
     public static final int CODE_GET_REQUEST = 1024;
     public static final int CODE_POST_REQUEST = 1025;
 
@@ -43,13 +45,13 @@ public class MainActivity extends AppCompatActivity {
 
     List<Library> libraryList;
 
-    boolean isUpdating = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Log.d("myTag", "This is my message");
         //editTextHeroId = (EditText) findViewById(R.id.editTextHeroId);
         //editTextName = (EditText) findViewById(R.id.editTextName);
         //editTextRealname = (EditText) findViewById(R.id.editTextRealname);
@@ -158,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
             ));
         }
 
-        HeroAdapter adapter = new HeroAdapter(libraryList);
+        BookAdapter adapter = new BookAdapter(libraryList);
         listView.setAdapter(adapter);
     }
 
@@ -209,10 +211,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    class HeroAdapter extends ArrayAdapter<Library> {
+    class BookAdapter extends ArrayAdapter<Library> {
         List<Library> libraryList;
 
-        public HeroAdapter(List<Library> libraryList) {
+        public BookAdapter(List<Library> libraryList) {
             super(MainActivity.this, R.layout.layout_library_list, libraryList);
             this.libraryList = libraryList;
         }
@@ -223,16 +225,19 @@ public class MainActivity extends AppCompatActivity {
             LayoutInflater inflater = getLayoutInflater();
             View listViewItem = inflater.inflate(R.layout.layout_library_list, null, true);
 
+
             TextView textViewTitle = listViewItem.findViewById(R.id.textViewTitle);
             TextView textViewAuthor = listViewItem.findViewById(R.id.textViewAuthor);
 
             //TextView textViewUpdate = listViewItem.findViewById(R.id.textViewUpdate);
-            //TextView textViewDelete = listViewItem.findViewById(R.id.textViewDelete);
+            TextView textViewDelete = listViewItem.findViewById(R.id.textViewDelete);
 
             final Library library = libraryList.get(position);
 
             textViewTitle.setText(library.getTitle());
             textViewAuthor.setText(library.getAuthor());
+
+
 
             /*textViewUpdate.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -243,12 +248,13 @@ public class MainActivity extends AppCompatActivity {
                     editTextRealname.setText(library.getAuthor());
                     buttonAddUpdate.setText("Update");
                 }
-            });
+            });*/
 
-            //   Delete
             textViewDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
+
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
@@ -279,7 +285,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-             */
+
 
             return listViewItem;
         }
