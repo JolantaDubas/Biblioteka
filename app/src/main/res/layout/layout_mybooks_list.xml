@@ -8,6 +8,18 @@
 
 
     <TextView
+        android:id="@+id/textViewBookId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        tools:ignore="MissingConstraints" />
+    <TextView
+        android:id="@+id/textViewUserId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        tools:ignore="MissingConstraints" />
+    <TextView
         android:id="@+id/textViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -168,12 +180,12 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="28dp"
         android:layout_weight="8"
         android:text="Data wypozyczenia"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
         app:layout_constraintEnd_toStartOf="@+id/textViewDate2"
-        app:layout_constraintHorizontal_bias="0.12"
+        app:layout_constraintHorizontal_bias="0.114"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewStatus" />
 
@@ -183,12 +195,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="28dp"
         android:layout_weight="8"
         android:text="Data oddania"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.846"
+        app:layout_constraintHorizontal_bias="0.863"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewStatus" />
 

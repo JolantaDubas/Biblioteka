@@ -8,17 +8,23 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class Login extends AppCompatActivity{
     EditText UsernameEt, PasswordEt;
-   public boolean isLogged = false;
+
+    TextView textViewLogin;
+    public boolean isLogged = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
 
-        UsernameEt = (EditText)findViewById(R.id.etUserName);
-        PasswordEt = (EditText)findViewById(R.id.etPassword);
+
+           setContentView(R.layout.activity_login);
+
+            UsernameEt = (EditText) findViewById(R.id.etUserName);
+            PasswordEt = (EditText) findViewById(R.id.etPassword);
 
     }
 
@@ -28,7 +34,7 @@ public class Login extends AppCompatActivity{
         String type = "login";
         BackgroundWorker backgroundWorker = new BackgroundWorker(this);
         backgroundWorker.execute(type, username, password);
-
+    isLogged=true;
 
 
         Log.d("Login", username);

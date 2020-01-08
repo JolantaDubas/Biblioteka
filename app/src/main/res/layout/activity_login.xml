@@ -19,6 +19,12 @@
         app:layout_constraintTop_toTopOf="parent">
 
 
+        <TextView
+            android:id="@+id/textViewLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:ignore="MissingConstraints" />
         <Button
             android:id="@+id/ksiegozbior_button"
             android:layout_width="207dp"

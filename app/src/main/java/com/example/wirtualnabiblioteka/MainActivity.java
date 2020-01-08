@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -74,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
                     createHero();
                 }
             }
+
+
         });*/
         readBooks();
     }
@@ -239,7 +242,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-            /*textViewUpdate.setOnClickListener(new View.OnClickListener() {
+            /*
+                }textViewUpdate.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     isUpdating = true;
@@ -247,7 +251,6 @@ public class MainActivity extends AppCompatActivity {
                     editTextName.setText(library.getTitle());
                     editTextRealname.setText(library.getAuthor());
                     buttonAddUpdate.setText("Update");
-                }
             });*/
 
             textViewDelete.setOnClickListener(new View.OnClickListener() {
@@ -256,13 +259,18 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    Intent intent =new Intent(MainActivity.this , Book.class);
+                    intent.putExtra("tytul",library.getTitle());
+                    startActivity(intent);
+
+                   /* AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
                     builder.setTitle("Ksiazka " + library.getTitle())
                             .setMessage("Are you sure you want to delete it?")
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     setContentView(R.layout.activity_book);
+
 
 
                                     progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -281,7 +289,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                             })
                             .setIcon(android.R.drawable.ic_dialog_alert)
-                            .show();
+                            .show();*/
                 }
             });
 

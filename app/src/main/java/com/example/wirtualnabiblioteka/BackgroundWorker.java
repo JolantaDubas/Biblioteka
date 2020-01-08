@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -62,22 +63,22 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
                 String line="";
 
 
-
                 while((line = bufferedReader.readLine())!= null) {
                     result += line;
-
-                    System.out.print(1);
                 }
                 bufferedReader.close();
                 inputStream.close();
                 httpURLConnection.disconnect();
-                System.out.print(2);
+
 
                 if(result!=null && result.equals("login success")){
 
                     Intent intent =new Intent(context, MyBooks.class);
+                    Intent intent2 =new Intent(context, Book.class);
+                    intent2.putExtra("login",user_name);
                     intent.putExtra("login",user_name);
                     context.startActivity(intent);
+
                 }
                 return result;
             } catch (MalformedURLException e) {

@@ -2,12 +2,12 @@ package com.example.wirtualnabiblioteka;
 
 public class MyLibrary {
 
-    private int id;
-    private String title, name, surname, pseudonym, descr, genre,  language, namePubl,  locationPubl,date1,  date2, status;
+    private int id,status, id_copy;
+    private String title, name, surname, pseudonym, descr, genre,  language, namePubl,  locationPubl,date1,  date2;
 
     public MyLibrary(int id, String title,String name, String surname, String pseudonym, String descr,
-                     String genre, String language, String namePubl, String locationPubl,
-                     String status, String date1, String date2) {
+                     String genre, String language, String namePubl, String locationPubl, int id_copy,
+                     int status, String date1, String date2) {
         this.id = id;
         this.title = title;
         this.name = name;
@@ -18,6 +18,7 @@ public class MyLibrary {
         this.language=language;
         this.namePubl=namePubl;
         this.locationPubl = locationPubl;
+        this.id_copy=id_copy;
         this.status = status;
         this.date1 = date1;
         this.date2=date2;
@@ -59,7 +60,8 @@ public class MyLibrary {
         return locationPubl;
     }
 
-    public String getStatus() { return status; }
+    public int getStatus() { return status; }
+    public int getCopyId() { return id_copy; }
     public String getDate1() {
         return date1;
     }

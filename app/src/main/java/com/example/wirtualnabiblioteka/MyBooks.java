@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -95,7 +96,8 @@ import static android.view.View.GONE;
                         obj.getString("j.jezyk"),
                         obj.getString("w.nazwa"),
                         obj.getString("w.lokalizacja"),
-                        obj.getString("kp.status"),
+                        obj.getInt("kp.id_kopie"),
+                        obj.getInt("kp.status"),
                         obj.getString("rez.data_wypozyczenia"),
                         obj.getString("rez.data_oddania")
                 ));
@@ -166,6 +168,7 @@ import static android.view.View.GONE;
                 LayoutInflater inflater = getLayoutInflater();
                 View listViewItem = inflater.inflate(R.layout.layout_mybooks_list, null, true);
 
+                TextView textViewBookId = listViewItem.findViewById(R.id.textViewBookId);
                 TextView textViewTitle = listViewItem.findViewById(R.id.textViewTitle);
                 TextView textViewName = listViewItem.findViewById(R.id.textViewName);
                 TextView textViewSurname = listViewItem.findViewById(R.id.textViewSurname);
@@ -175,9 +178,12 @@ import static android.view.View.GONE;
                 TextView textViewLanguage = listViewItem.findViewById(R.id.textViewLanguage);
                 TextView textViewNamePubl = listViewItem.findViewById(R.id.textViewNamePubl);
                 TextView textViewLocationPubl = listViewItem.findViewById(R.id.textViewLocationPubl);
-                TextView textViewStatus = listViewItem.findViewById(R.id.textViewStatus);
-                TextView textViewDate1 = listViewItem.findViewById(R.id.textViewDate1);
-                TextView textViewDate2 = listViewItem.findViewById(R.id.textViewDate2);
+                TextView textViewCopyId = listViewItem.findViewById(R.id.textViewCopyId);
+                final TextView textViewStatus = listViewItem.findViewById(R.id.textViewStatus);
+                final TextView textViewDate1 = listViewItem.findViewById(R.id.textViewDate1);
+                final TextView textViewDate2 = listViewItem.findViewById(R.id.textViewDate2);
+
+                // CheckBox checkBoxStatus=listViewItem.findViewById(R.id.checkBoxStatus);
 
                 //TextView textViewUpdate = listViewItem.findViewById(R.id.textViewUpdate);
                 //TextView textViewDelete = listViewItem.findViewById(R.id.textViewDelete);
@@ -193,9 +199,12 @@ import static android.view.View.GONE;
                 textViewLanguage.setText(library.getLanguage());
                 textViewNamePubl.setText(library.getNamePubl());
                 textViewLocationPubl.setText(library.getLocationPubl());
-                textViewStatus.setText(library.getStatus());
+                textViewStatus.setText("Zarezerwowana");
                 textViewDate1.setText(library.getDate1());
                 textViewDate2.setText(library.getDate2());
+               // checkBoxStatus.setText(library.getStatus());
+
+
 
 
 

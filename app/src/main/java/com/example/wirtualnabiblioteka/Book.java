@@ -1,14 +1,18 @@
 package com.example.wirtualnabiblioteka;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import com.example.wirtualnabiblioteka.MainActivity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -23,10 +27,12 @@ import java.util.HashMap;
 import java.util.List;
 
 
+
 import static android.view.View.GONE;
 
-public class Book extends AppCompatActivity {
 
+
+public class Book extends AppCompatActivity {
 
     public static final int CODE_GET_REQUEST = 1024;
     public static final int CODE_POST_REQUEST = 1025;
@@ -34,31 +40,61 @@ public class Book extends AppCompatActivity {
 
     ProgressBar progressBar;
     ListView listView;
+
+
     Button buttonAddUpdate;
 
     TextView tvTitle, tvName;
 
-    List<Library> libraryList;
+    List<MyLibrary> libraryList;
 
-    boolean isUpdating = false;
+EditText textViewDate1,textViewDate2;
+TextView textViewLogin, textViewCopyId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book);
 
+
+        Log.d("Book", "tytul");
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         listView = (ListView) findViewById(R.id.listViewBooks);
 
-        libraryList = new ArrayList<>();
+        //textViewLogin=(TextView) findViewById(R.id.textViewLogin);
+       // textViewCopyId=(TextView) findViewById(R.id.textViewCopyId);
+        textViewDate1 = (EditText) findViewById(R.id.textViewDate1);
+        textViewDate2 = (EditText) findViewById(R.id.textViewDate2);
 
-        readBooks();
+
+        Intent i = getIntent();
+        String tytul = i.getStringExtra("tytul");
+
+        //String login="";
+        //login = i.getStringExtra("login");
+
+        Log.d("moj ksiazka", tytul);
+       // Log.d("moj login", login);
+
+
+       /*if(login.isEmpty()){
+        }else{
+            textViewLogin.setText(login);
+        }*/
+        libraryList = new ArrayList<>();
+        readBook(tytul);
+
     }
 
-    private void readBooks() {
-        PerformNetworkRequest request = new PerformNetworkRequest(URL.URL_READ_BOOKS, null, CODE_GET_REQUEST);
+    private void readBook(String tytul) {
+        PerformNetworkRequest request = new PerformNetworkRequest(URL.URL_READ_BOOK + tytul, null, CODE_GET_REQUEST);
         request.execute();
     }
+    private void readBooks() {
+        PerformNetworkRequest request = new PerformNetworkRequest(URL.URL_READ_BOOKS , null, CODE_GET_REQUEST);
+        request.execute();
+    }
+
 
 
 
@@ -68,12 +104,24 @@ public class Book extends AppCompatActivity {
         for (int i = 0; i < ksiazki.length(); i++) {
             JSONObject obj = ksiazki.getJSONObject(i);
 
-            libraryList.add(new Library(
+            libraryList.add(new MyLibrary(
                     obj.getInt("k.id_ksiazka"),
                     obj.getString("k.tytul"),
-                    obj.getString("a.imie")
+                    obj.getString("a.imie"),
+                    obj.getString("a.nazwisko"),
+                    obj.getString("a.pseudonim"),
+                    obj.getString("k.opis"),
+                    obj.getString("kt.kategoria"),
+                    obj.getString("j.jezyk"),
+                    obj.getString("w.nazwa"),
+                    obj.getString("w.lokalizacja"),
+                    obj.getInt("kp.id_kopie"),
+                    obj.getInt("kp.status"),
+                    obj.getString("rez.data_wypozyczenia"),
+                    obj.getString("rez.data_oddania")
             ));
         }
+
 
         BookAdapter adapter = new BookAdapter(libraryList);
         listView.setAdapter(adapter);
@@ -106,6 +154,8 @@ public class Book extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
                     refreshBooksList(object.getJSONArray("ksiazki"));
                 }
+
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -126,10 +176,10 @@ public class Book extends AppCompatActivity {
         }
     }
 
-    class BookAdapter extends ArrayAdapter<Library> {
-        List<Library> libraryList;
+    class BookAdapter extends ArrayAdapter<MyLibrary> {
+        List<MyLibrary> libraryList;
 
-        public BookAdapter(List<Library> libraryList) {
+        public BookAdapter(List<MyLibrary> libraryList) {
             super(Book.this, R.layout.layout_book_info, libraryList);
             this.libraryList = libraryList;
         }
@@ -138,22 +188,103 @@ public class Book extends AppCompatActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             LayoutInflater inflater = getLayoutInflater();
-            View listViewItem = inflater.inflate(R.layout.layout_mybooks_list, null, true);
+            final View listViewItem = inflater.inflate(R.layout.layout_mybooks_list, null, true);
 
+            TextView textViewBookId = listViewItem.findViewById(R.id.textViewBookId);
             TextView textViewTitle = listViewItem.findViewById(R.id.textViewTitle);
-            TextView textViewAuthor = listViewItem.findViewById(R.id.textViewAuthor);
+            TextView textViewName = listViewItem.findViewById(R.id.textViewName);
+            TextView textViewSurname = listViewItem.findViewById(R.id.textViewSurname);
+            TextView textViewPseudonym = listViewItem.findViewById(R.id.textViewPseudonym);
+            TextView textViewDescr = listViewItem.findViewById(R.id.textViewDescr);
+            TextView textViewGenre = listViewItem.findViewById(R.id.textViewGenre);
+            TextView textViewLanguage = listViewItem.findViewById(R.id.textViewLanguage);
+            TextView textViewNamePubl = listViewItem.findViewById(R.id.textViewNamePubl);
+            TextView textViewLocationPubl = listViewItem.findViewById(R.id.textViewLocationPubl);
+            TextView textViewCopyId = listViewItem.findViewById(R.id.textViewCopyId);
+            final TextView textViewStatus = listViewItem.findViewById(R.id.textViewStatus);
+            final TextView textViewDate1 = listViewItem.findViewById(R.id.textViewDate1);
+            final TextView textViewDate2 = listViewItem.findViewById(R.id.textViewDate2);
 
             //TextView textViewUpdate = listViewItem.findViewById(R.id.textViewUpdate);
             //TextView textViewDelete = listViewItem.findViewById(R.id.textViewDelete);
 
-            final Library library = libraryList.get(position);
+            final MyLibrary library = libraryList.get(position);
 
+            textViewBookId.setText(String.valueOf(library.getId()));
             textViewTitle.setText(library.getTitle());
-            textViewAuthor.setText(library.getAuthor());
+            textViewName.setText(library.getAuthor());
+            textViewSurname.setText(library.getSurname());
+            textViewPseudonym.setText(library.getPseudonym());
+            textViewDescr.setText(library.getDescr());
+            textViewGenre.setText(library.getGenre());
+            textViewLanguage.setText(library.getLanguage());
+            textViewNamePubl.setText(library.getNamePubl());
+            textViewLocationPubl.setText(library.getLocationPubl());
+            textViewDate1.setText(library.getDate1());
+            textViewDate2.setText(library.getDate2());
+//            textViewCopyId.setText(String.valueOf(library.getCopyId()));
+            if(library.getStatus()==1){
+                textViewStatus.setText("Zarezerwowana");
+            }else{
+                textViewStatus.setText("Dostepna,Zarezerwuj");
 
+                textViewStatus.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+
+                        //textViewDate1.setText(library.getDate1());
+                       // textViewDate2.setText(library.getDate2());
+                        updateStatus();
+                    }
+                });
+            }
             return listViewItem;
         }
+
     }
 
+    private void updateStatus() {
+
+        int status = 1;
+
+
+        //String login = textViewLogin.getText().toString();
+       // String copyId = textViewCopyId.getText().toString();
+        String date1 = textViewDate1.getText().toString();
+        String date2 = textViewDate2.getText().toString();
+
+String login="dsa";
+        if (TextUtils.isEmpty(login)) {
+            textViewLogin.setError("Zaloguj się");
+            textViewLogin.requestFocus();
+            return;
+        }
+
+        if (TextUtils.isEmpty(date1)) {
+            textViewDate1.setError("Wprowadz date wypozyczenia");
+            textViewDate1.requestFocus();
+            return;
+        }
+
+        if (TextUtils.isEmpty(date2)) {
+            textViewDate2.setError("Wprowadz date oddania");
+            textViewDate2.requestFocus();
+            return;
+        }
+
+        HashMap<String, String> params = new HashMap<>();
+        params.put("login", login);
+        params.put("data_wypozyczenia", date1);
+        params.put("data_oddania", date2);
+        params.put("id_kopie", "2");
+
+        PerformNetworkRequest request = new PerformNetworkRequest(URL.URL_UPDATE_STATUS, params, CODE_POST_REQUEST);
+        request.execute();
+
+    }
+
+
+    public void OpenLibrary(View view) { startActivity(new Intent(this, MainActivity.class)); }
 
 }

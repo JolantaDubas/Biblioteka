@@ -6,7 +6,7 @@ public class URL {
    // public static final String URL_CREATE_HERO = ROOT_URL + "createhero";
     public static final String URL_READ_BOOKS = ROOT_URL + "getbooks";
     public static final String URL_READ_MYBOOKS = ROOT_URL + "getmybooks&login=";
-    public static final String URL_UPDATE_HERO = ROOT_URL + "updatehero";
+    public static final String URL_UPDATE_STATUS = ROOT_URL + "updatestatus";
     public static final String URL_DELETE_HERO = ROOT_URL + "deletehero&id_ksiazka=";
-    public static final String URL_READ_BOOK = ROOT_URL + "getbook&id=";
+    public static final String URL_READ_BOOK = ROOT_URL + "getbook&tytul=";
 }
