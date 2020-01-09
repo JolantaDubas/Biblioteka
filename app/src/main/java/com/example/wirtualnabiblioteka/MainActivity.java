@@ -260,7 +260,8 @@ public class MainActivity extends AppCompatActivity {
 
 
                     Intent intent =new Intent(MainActivity.this , Book.class);
-                    intent.putExtra("tytul",library.getTitle());
+
+                    intent.putExtra("bookId",library.getId());
                     startActivity(intent);
 
                    /* AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
@@ -300,7 +301,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void OpenLogin(View view) {
-        startActivity(new Intent(this, Login.class));
+            startActivity(new Intent(this, Login.class));
     }
 
     public void BookInfo(View view) {

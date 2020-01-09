@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Background"
+    android:background="@color/Backgroundlight"
     tools:context=".Login">
 
 
@@ -25,16 +25,18 @@
             android:layout_height="wrap_content"
             android:visibility="gone"
             tools:ignore="MissingConstraints" />
+
         <Button
             android:id="@+id/ksiegozbior_button"
             android:layout_width="207dp"
             android:layout_height="match_parent"
             android:background="@color/colorPrimaryDark"
-            android:text="Biblioteka"
             android:onClick="OpenLibrary"
+            android:text="Biblioteka"
             android:textColor="@android:color/darker_gray"
             tools:layout_editor_absoluteX="266dp"
             tools:layout_editor_absoluteY="0dp" />
+
         <Button
             android:id="@+id/konto_button"
             android:layout_width="204dp"
@@ -94,20 +96,6 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_Reg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/btn_Library"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:color/holo_blue_dark"
-        android:onClick="OpenLibrary"
-        android:text="Otworz biblioteke"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/btn_Reg"

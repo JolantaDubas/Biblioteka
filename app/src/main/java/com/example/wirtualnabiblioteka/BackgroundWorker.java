@@ -75,8 +75,10 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
 
                     Intent intent =new Intent(context, MyBooks.class);
                     Intent intent2 =new Intent(context, Book.class);
+                    Intent intent3 =new Intent(context, Book.class);
                     intent2.putExtra("login",user_name);
                     intent.putExtra("login",user_name);
+                    intent3.putExtra("login",user_name);
                     context.startActivity(intent);
 
                 }

@@ -60,8 +60,10 @@ public class MyLibrary {
         return locationPubl;
     }
 
-    public int getStatus() { return status; }
     public int getCopyId() { return id_copy; }
+
+    public int getStatus() { return status; }
+
     public String getDate1() {
         return date1;
     }

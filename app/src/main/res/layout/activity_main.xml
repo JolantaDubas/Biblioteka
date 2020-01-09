@@ -4,19 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/Background"
-    tools:context="MainActivity">
+    tools:context=".MainActivity">
 
-    <SearchView
-        style="@android:style/Widget.Material.Light.SearchView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="14dp"
-        android:background="@android:color/white" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -90,11 +79,12 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="0dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="100dp"
-        android:layout_marginEnd="0dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="0dp"
-        >
+        android:divider="@color/Background"
+        android:dividerHeight="10sp">
 
     </ListView>
 

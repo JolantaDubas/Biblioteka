@@ -48,32 +48,36 @@ public class Book extends AppCompatActivity {
 
     List<MyLibrary> libraryList;
 
-EditText textViewDate1,textViewDate2;
-TextView textViewLogin, textViewCopyId;
+EditText textViewDate1,textViewDate2,textViewLogin, textViewCopyId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Intent i = getIntent();
+        String login= i.getStringExtra("login");
+
         setContentView(R.layout.activity_book);
-
-
         Log.d("Book", "tytul");
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         listView = (ListView) findViewById(R.id.listViewBooks);
 
-        //textViewLogin=(TextView) findViewById(R.id.textViewLogin);
-       // textViewCopyId=(TextView) findViewById(R.id.textViewCopyId);
-        textViewDate1 = (EditText) findViewById(R.id.textViewDate1);
-        textViewDate2 = (EditText) findViewById(R.id.textViewDate2);
+        textViewLogin=(EditText) findViewById(R.id.textViewLogin);
+        textViewCopyId=(EditText) findViewById(R.id.textViewCopyId);
+        textViewDate1 =(EditText) findViewById(R.id.textViewDate1);
+        textViewDate2 =(EditText) findViewById(R.id.textViewDate2);
 
 
-        Intent i = getIntent();
-        String tytul = i.getStringExtra("tytul");
+
+        int bookId = i.getIntExtra("bookId", 1);
+
+
 
         //String login="";
         //login = i.getStringExtra("login");
 
-        Log.d("moj ksiazka", tytul);
+        //Log.d("moj ksiazka",);
        // Log.d("moj login", login);
 
 
@@ -82,12 +86,12 @@ TextView textViewLogin, textViewCopyId;
             textViewLogin.setText(login);
         }*/
         libraryList = new ArrayList<>();
-        readBook(tytul);
+        readBook(bookId);
 
     }
 
-    private void readBook(String tytul) {
-        PerformNetworkRequest request = new PerformNetworkRequest(URL.URL_READ_BOOK + tytul, null, CODE_GET_REQUEST);
+    private void readBook(int bookId) {
+        PerformNetworkRequest request = new PerformNetworkRequest(URL.URL_READ_BOOK + bookId, null, CODE_GET_REQUEST);
         request.execute();
     }
     private void readBooks() {
@@ -188,7 +192,7 @@ TextView textViewLogin, textViewCopyId;
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             LayoutInflater inflater = getLayoutInflater();
-            final View listViewItem = inflater.inflate(R.layout.layout_mybooks_list, null, true);
+            final View listViewItem = inflater.inflate(R.layout.layout_book_info, null, true);
 
             TextView textViewBookId = listViewItem.findViewById(R.id.textViewBookId);
             TextView textViewTitle = listViewItem.findViewById(R.id.textViewTitle);
@@ -200,10 +204,10 @@ TextView textViewLogin, textViewCopyId;
             TextView textViewLanguage = listViewItem.findViewById(R.id.textViewLanguage);
             TextView textViewNamePubl = listViewItem.findViewById(R.id.textViewNamePubl);
             TextView textViewLocationPubl = listViewItem.findViewById(R.id.textViewLocationPubl);
-            TextView textViewCopyId = listViewItem.findViewById(R.id.textViewCopyId);
+            EditText textViewCopyId = listViewItem.findViewById(R.id.textViewCopyId);
             final TextView textViewStatus = listViewItem.findViewById(R.id.textViewStatus);
-            final TextView textViewDate1 = listViewItem.findViewById(R.id.textViewDate1);
-            final TextView textViewDate2 = listViewItem.findViewById(R.id.textViewDate2);
+            final EditText textViewDate1 = listViewItem.findViewById(R.id.textViewDate1);
+            final EditText textViewDate2 = listViewItem.findViewById(R.id.textViewDate2);
 
             //TextView textViewUpdate = listViewItem.findViewById(R.id.textViewUpdate);
             //TextView textViewDelete = listViewItem.findViewById(R.id.textViewDelete);
@@ -222,7 +226,7 @@ TextView textViewLogin, textViewCopyId;
             textViewLocationPubl.setText(library.getLocationPubl());
             textViewDate1.setText(library.getDate1());
             textViewDate2.setText(library.getDate2());
-//            textViewCopyId.setText(String.valueOf(library.getCopyId()));
+            textViewCopyId.setText(String.valueOf(library.getCopyId()));
             if(library.getStatus()==1){
                 textViewStatus.setText("Zarezerwowana");
             }else{
@@ -249,13 +253,19 @@ TextView textViewLogin, textViewCopyId;
         int status = 1;
 
 
-        //String login = textViewLogin.getText().toString();
-       // String copyId = textViewCopyId.getText().toString();
-        String date1 = textViewDate1.getText().toString();
-        String date2 = textViewDate2.getText().toString();
+      //  String login = textViewLogin.getText().toString().trim();
+        String copyId = textViewCopyId.getText().toString().trim();
+        String date1 = textViewDate1.getText().toString().trim();
+        String date2 = textViewDate2.getText().toString().trim();
 
-String login="dsa";
-        if (TextUtils.isEmpty(login)) {
+
+        //if (TextUtils.isEmpty(login)) {
+          //  textViewLogin.setError("Zaloguj się");
+            //textViewLogin.requestFocus();
+           // return;
+       // }
+
+        if (TextUtils.isEmpty(copyId)) {
             textViewLogin.setError("Zaloguj się");
             textViewLogin.requestFocus();
             return;
@@ -274,10 +284,10 @@ String login="dsa";
         }
 
         HashMap<String, String> params = new HashMap<>();
-        params.put("login", login);
+        params.put("login", "dsa");
         params.put("data_wypozyczenia", date1);
         params.put("data_oddania", date2);
-        params.put("id_kopie", "2");
+        params.put("id_kopie", copyId);
 
         PerformNetworkRequest request = new PerformNetworkRequest(URL.URL_UPDATE_STATUS, params, CODE_POST_REQUEST);
         request.execute();
@@ -285,6 +295,7 @@ String login="dsa";
     }
 
 
-    public void OpenLibrary(View view) { startActivity(new Intent(this, MainActivity.class)); }
+    public void OpenLibrary(View view) {
+        startActivity(new Intent(this, MainActivity.class)); }
 
 }

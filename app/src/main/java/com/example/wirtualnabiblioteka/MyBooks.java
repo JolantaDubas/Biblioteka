@@ -168,7 +168,6 @@ import static android.view.View.GONE;
                 LayoutInflater inflater = getLayoutInflater();
                 View listViewItem = inflater.inflate(R.layout.layout_mybooks_list, null, true);
 
-                TextView textViewBookId = listViewItem.findViewById(R.id.textViewBookId);
                 TextView textViewTitle = listViewItem.findViewById(R.id.textViewTitle);
                 TextView textViewName = listViewItem.findViewById(R.id.textViewName);
                 TextView textViewSurname = listViewItem.findViewById(R.id.textViewSurname);
@@ -199,6 +198,7 @@ import static android.view.View.GONE;
                 textViewLanguage.setText(library.getLanguage());
                 textViewNamePubl.setText(library.getNamePubl());
                 textViewLocationPubl.setText(library.getLocationPubl());
+                textViewCopyId.setText(String.valueOf(library.getCopyId()));
                 textViewStatus.setText("Zarezerwowana");
                 textViewDate1.setText(library.getDate1());
                 textViewDate2.setText(library.getDate2());
