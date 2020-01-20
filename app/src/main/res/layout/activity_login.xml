@@ -28,7 +28,7 @@
 
         <Button
             android:id="@+id/ksiegozbior_button"
-            android:layout_width="207dp"
+            android:layout_width="210dp"
             android:layout_height="match_parent"
             android:background="@color/colorPrimaryDark"
             android:onClick="OpenLibrary"
@@ -39,7 +39,7 @@
 
         <Button
             android:id="@+id/konto_button"
-            android:layout_width="204dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/colorPrimary"
             android:text="Twoje konto"
@@ -91,7 +91,6 @@
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="44dp"
         android:background="@android:color/holo_blue_dark"
-        android:onClick="OnLogin"
         android:text="Zaloguj się"
         app:layout_constraintBottom_toTopOf="@+id/btn_Reg"
         app:layout_constraintEnd_toEndOf="parent"
@@ -103,8 +102,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="216dp"
         android:background="@android:color/holo_blue_dark"
-        android:onClick="OpenRegister"
         android:text="Zarejestruj się"
+        android:onClick="OpenRegister"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -137,4 +136,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_Login"
         app:layout_constraintVertical_bias="0.207" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listViewUser"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </ListView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

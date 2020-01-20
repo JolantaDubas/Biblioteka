@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -172,7 +171,6 @@ import static android.view.View.GONE;
                 TextView textViewName = listViewItem.findViewById(R.id.textViewName);
                 TextView textViewSurname = listViewItem.findViewById(R.id.textViewSurname);
                 TextView textViewPseudonym = listViewItem.findViewById(R.id.textViewPseudonym);
-                TextView textViewDescr = listViewItem.findViewById(R.id.textViewDescr);
                 TextView textViewGenre = listViewItem.findViewById(R.id.textViewGenre);
                 TextView textViewLanguage = listViewItem.findViewById(R.id.textViewLanguage);
                 TextView textViewNamePubl = listViewItem.findViewById(R.id.textViewNamePubl);
@@ -182,10 +180,7 @@ import static android.view.View.GONE;
                 final TextView textViewDate1 = listViewItem.findViewById(R.id.textViewDate1);
                 final TextView textViewDate2 = listViewItem.findViewById(R.id.textViewDate2);
 
-                // CheckBox checkBoxStatus=listViewItem.findViewById(R.id.checkBoxStatus);
 
-                //TextView textViewUpdate = listViewItem.findViewById(R.id.textViewUpdate);
-                //TextView textViewDelete = listViewItem.findViewById(R.id.textViewDelete);
 
                 final MyLibrary library = libraryList.get(position);
 
@@ -193,7 +188,6 @@ import static android.view.View.GONE;
                 textViewName.setText(library.getAuthor());
                 textViewSurname.setText(library.getSurname());
                 textViewPseudonym.setText(library.getPseudonym());
-                textViewDescr.setText(library.getDescr());
                 textViewGenre.setText(library.getGenre());
                 textViewLanguage.setText(library.getLanguage());
                 textViewNamePubl.setText(library.getNamePubl());

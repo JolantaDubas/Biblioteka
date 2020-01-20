@@ -20,9 +20,7 @@ import java.net.URLEncoder;
 
 
 
-/**
- * Created by ProgrammingKnowledge on 1/5/2016.
- */
+
 public class BackgroundWorker extends AsyncTask<String,Void,String> {
     Context context;
 

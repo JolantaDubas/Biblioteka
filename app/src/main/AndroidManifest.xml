@@ -16,9 +16,9 @@
         <activity android:name=".MyBooks"></activity>
         <activity android:name=".Book" />
         <activity android:name=".Library" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".Login"/>
         <activity android:name=".Register" />
-        <activity android:name=".Login">
+        <activity android:name=".MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

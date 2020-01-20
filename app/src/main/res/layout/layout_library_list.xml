@@ -28,7 +28,7 @@
         android:layout_marginLeft="13dp"
         android:layout_weight="8"
         android:text="Tytul ksiazki"
-        android:textSize="30sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 

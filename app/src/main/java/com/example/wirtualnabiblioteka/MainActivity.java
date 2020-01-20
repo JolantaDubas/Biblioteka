@@ -39,11 +39,11 @@ public class MainActivity extends AppCompatActivity {
 
 
     ProgressBar progressBar;
-    ListView listView;
+
     Button buttonAddUpdate;
 
     TextView tvTitle, tvName;
-
+    ListView listView;
     List<Library> libraryList;
 
 
@@ -53,31 +53,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d("myTag", "This is my message");
-        //editTextHeroId = (EditText) findViewById(R.id.editTextHeroId);
-        //editTextName = (EditText) findViewById(R.id.editTextName);
-        //editTextRealname = (EditText) findViewById(R.id.editTextRealname);
-       // ratingBar = (RatingBar) findViewById(R.id.ratingBar);
 
-       // buttonAddUpdate = (Button) findViewById(R.id.buttonAddUpdate);
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         listView = (ListView) findViewById(R.id.listViewBooks);
 
         libraryList = new ArrayList<>();
 
-
-        /* buttonAddUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (isUpdating) {
-                    updateHero();
-                } else {
-                    createHero();
-                }
-            }
-
-
-        });*/
         readBooks();
     }
 
@@ -86,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         request.execute();
     }
 
+
     private void readBook(int id) {
         PerformNetworkRequest request = new PerformNetworkRequest(URL.URL_READ_BOOK + id, null, CODE_POST_REQUEST);
         request.execute();
@@ -93,61 +76,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-   /*
-   private void updateHero() {
-
-        String id = editTextHeroId.getText().toString();
-        String name = editTextName.getText().toString().trim();
-        String realname = editTextRealname.getText().toString().trim();
-
-        int rating = (int) ratingBar.getRating();
-
-        String team = spinnerTeam.getSelectedItem().toString();
-
-
-        if (TextUtils.isEmpty(name)) {
-            editTextName.setError("Please enter name");
-            editTextName.requestFocus();
-            return;
-        }
-
-        if (TextUtils.isEmpty(realname)) {
-            editTextRealname.setError("Please enter real name");
-            editTextRealname.requestFocus();
-            return;
-        }
-
-    */
-
-        /*wpisywanie nowych wartosci
-        HashMap<String, String> params = new HashMap<>();
-        params.put("id", id);
-        params.put("name", name);
-        params.put("realname", realname);
-        params.put("rating", String.valueOf(rating));
-        params.put("teamaffiliation", team);
-
-
-
-        PerformNetworkRequest request = new PerformNetworkRequest(URL.URL_UPDATE_HERO, params, CODE_POST_REQUEST);
-        request.execute();
-
-
-
-        buttonAddUpdate.setText("Add");
-
-        editTextName.setText("");
-        editTextRealname.setText("");
-        ratingBar.setRating(0);
-        spinnerTeam.setSelection(0);
-
-        isUpdating = false;
-    }
-
-    private void deleteHero(int id) {
-        PerformNetworkRequest request = new PerformNetworkRequest(URL.URL_DELETE_HERO + id, null, CODE_GET_REQUEST);
-        request.execute();
-    }*/
 
     private void refreshBooksList(JSONArray ksiazki) throws JSONException {
         libraryList.clear();
@@ -228,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
             LayoutInflater inflater = getLayoutInflater();
             View listViewItem = inflater.inflate(R.layout.layout_library_list, null, true);
 
-
+            Log.d("View", "dziala");
             TextView textViewTitle = listViewItem.findViewById(R.id.textViewTitle);
             TextView textViewAuthor = listViewItem.findViewById(R.id.textViewAuthor);
 
@@ -242,17 +170,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-            /*
-                }textViewUpdate.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    isUpdating = true;
-                    editTextHeroId.setText(String.valueOf(library.getId()));
-                    editTextName.setText(library.getTitle());
-                    editTextRealname.setText(library.getAuthor());
-                    buttonAddUpdate.setText("Update");
-            });*/
-
             textViewDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -264,33 +181,7 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("bookId",library.getId());
                     startActivity(intent);
 
-                   /* AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
-                    builder.setTitle("Ksiazka " + library.getTitle())
-                            .setMessage("Are you sure you want to delete it?")
-                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    setContentView(R.layout.activity_book);
-
-
-
-                                    progressBar = (ProgressBar) findViewById(R.id.progressBar);
-                                    listView = (ListView) findViewById(R.id.listViewBooks);
-
-                                    libraryList = new ArrayList<>();
-                                    readBook(library.getId());
-                                    //tvTitle.setText(library.getTitle());
-                                    //tvName.setText(library.getAuthor());
-
-                                }
-                            })
-                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-
-                                }
-                            })
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .show();*/
                 }
             });
 
