@@ -206,6 +206,7 @@ EditText textViewDate1,textViewDate2,textViewLogin, textViewCopyId;
             final View listViewItem = inflater.inflate(R.layout.layout_mybooks_list, null, true);
 
             TextView textViewBookId = listViewItem.findViewById(R.id.textViewBookId);
+            final TextView textViewUserId = listViewItem.findViewById(R.id.textViewUserId);
             TextView textViewTitle = listViewItem.findViewById(R.id.textViewTitle);
             TextView textViewName = listViewItem.findViewById(R.id.textViewName);
             TextView textViewSurname = listViewItem.findViewById(R.id.textViewSurname);
@@ -257,12 +258,18 @@ EditText textViewDate1,textViewDate2,textViewLogin, textViewCopyId;
                         String date1 = textViewDate1.getText().toString();
                         String date2 = textViewDate2.getText().toString();
                         String copyId=textViewCopyId.getText().toString();
+                        String userId = textViewUserId.getText().toString();
                         String login="admin";
                       //  String login=textViewLogin.getText().toString();
 
 
                         if (TextUtils.isEmpty(date1)) {
                             textViewDate1.setError("Wprowadz date wypozyczenia");
+                            textViewDate1.requestFocus();
+                            return;
+                        }
+                        if (TextUtils.isEmpty(userId)) {
+                            textViewDate1.setError("Zaloguj sie");
                             textViewDate1.requestFocus();
                             return;
                         }
@@ -277,7 +284,7 @@ EditText textViewDate1,textViewDate2,textViewLogin, textViewCopyId;
                             textViewDate2.requestFocus();
                             return;
                         }
-                        updateStatus(date1,date2,copyId,login);
+                        updateStatus(date1,date2,copyId,userId);
                     }
                 });
                 textViewDate1.setOnClickListener(new View.OnClickListener() {
@@ -326,7 +333,7 @@ EditText textViewDate1,textViewDate2,textViewLogin, textViewCopyId;
 
 
     }
-    private void updateStatus(String date1, String date2, String copyId, String login) {
+    private void updateStatus(String date1, String date2, String copyId, String userId) {
 
       //  String login = textViewLogin.getText().toString().trim();
      //   String copyId = textViewCopyId.getText().toString().trim();
@@ -343,8 +350,7 @@ EditText textViewDate1,textViewDate2,textViewLogin, textViewCopyId;
         Log.d("Copyid", copyId);
         Log.d("Date1", date1);
         Log.d("Date2", date2);
-        Log.d("Login", login);
-
+        Log.d("UserId", userId);
        // if (TextUtils.isEmpty(copyId)) {
          //   textViewLogin.setError("Zaloguj się");
            // textViewLogin.requestFocus();
@@ -354,7 +360,7 @@ EditText textViewDate1,textViewDate2,textViewLogin, textViewCopyId;
 
 
         HashMap<String, String> params = new HashMap<>();
-        params.put("id_uzytkownik", "2");
+        params.put("id_uzytkownik", userId);
         params.put("data_wypozyczenia", date1);
         params.put("data_oddania", date2);
         params.put("id_kopie", copyId);
